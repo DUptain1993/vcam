@@ -50,7 +50,7 @@ public class Camera2Handler {
                     if (SharedState.toast_content != null && SharedState.need_to_show_toast) {
                         try {
                             Toast.makeText(SharedState.toast_content,
-                                    "不存在替换视频\n" + lpparam.packageName + "当前路径：" + SharedState.video_path,
+                                    "No replacement video\n" + lpparam.packageName + "\nCurrent path: " + SharedState.video_path,
                                     Toast.LENGTH_SHORT).show();
                         } catch (Exception ee) {
                             XposedBridge.log("【VCAM】[toast]" + ee.toString());
@@ -82,7 +82,7 @@ public class Camera2Handler {
                     if (SharedState.toast_content != null && SharedState.need_to_show_toast) {
                         try {
                             Toast.makeText(SharedState.toast_content,
-                                    "不存在替换视频\n" + lpparam.packageName + "当前路径：" + SharedState.video_path,
+                                    "No replacement video\n" + lpparam.packageName + "\nCurrent path: " + SharedState.video_path,
                                     Toast.LENGTH_SHORT).show();
                         } catch (Exception ee) {
                             XposedBridge.log("【VCAM】[toast]" + ee.toString());
@@ -107,13 +107,20 @@ public class Camera2Handler {
                 if (param.args[0] == null) return;
                 if (param.thisObject == null) return;
 
-                File file = HookGuards.getVideoFile();
+                File file;
+                try {
+                    file = HookGuards.getVideoFile();
+                    if (file == null || !file.exists()) file = null;
+                } catch (Throwable t) {
+                    XposedBridge.log("【VCAM】addTarget 读取视频失败: " + t);
+                    return;
+                }
                 SharedState.need_to_show_toast = HookGuards.shouldShowToast();
-                if (!file.exists()) {
+                if (file == null) {
                     if (SharedState.toast_content != null && SharedState.need_to_show_toast) {
                         try {
                             Toast.makeText(SharedState.toast_content,
-                                    "不存在替换视频\n" + lpparam.packageName + "当前路径：" + SharedState.video_path,
+                                    "No replacement video\n" + lpparam.packageName + "\nCurrent path: " + SharedState.video_path,
                                     Toast.LENGTH_SHORT).show();
                         } catch (Exception ee) {
                             XposedBridge.log("【VCAM】[toast]" + ee.toString());
@@ -121,8 +128,10 @@ public class Camera2Handler {
                     }
                     return;
                 }
-                if (param.args[0].equals(SharedState.c2_virtual_surface)) return;
                 if (HookGuards.isDisabled()) return;
+                Surface virtual = SharedState.c2_virtual_surface;
+                if (virtual == null || !virtual.isValid()) return;
+                if (param.args[0].equals(virtual)) return;
 
                 String surfaceInfo = param.args[0].toString();
                 if (surfaceInfo.contains("Surface(name=null)")) {
@@ -145,7 +154,7 @@ public class Camera2Handler {
                     }
                 }
                 XposedBridge.log("【VCAM】添加目标：" + param.args[0].toString());
-                param.args[0] = SharedState.c2_virtual_surface;
+                param.args[0] = virtual;
             }
         });
     }
@@ -165,7 +174,7 @@ public class Camera2Handler {
                     if (SharedState.toast_content != null && SharedState.need_to_show_toast) {
                         try {
                             Toast.makeText(SharedState.toast_content,
-                                    "不存在替换视频\n" + lpparam.packageName + "当前路径：" + SharedState.video_path,
+                                    "No replacement video\n" + lpparam.packageName + "\nCurrent path: " + SharedState.video_path,
                                     Toast.LENGTH_SHORT).show();
                         } catch (Exception ee) {
                             XposedBridge.log("【VCAM】[toast]" + ee.toString());
@@ -202,7 +211,7 @@ public class Camera2Handler {
                     if (SharedState.toast_content != null) {
                         try {
                             Toast.makeText(SharedState.toast_content,
-                                    "不存在替换视频\n" + lpparam.packageName + "当前路径：" + SharedState.video_path,
+                                    "No replacement video\n" + lpparam.packageName + "\nCurrent path: " + SharedState.video_path,
                                     Toast.LENGTH_SHORT).show();
                         } catch (Exception ee) {
                             XposedBridge.log("【VCAM】[toast]" + ee.toString());
@@ -232,8 +241,8 @@ public class Camera2Handler {
                 if (SharedState.toast_content != null && SharedState.need_to_show_toast) {
                     try {
                         Toast.makeText(SharedState.toast_content,
-                                "应用创建了渲染器：\n宽：" + param.args[0] + "\n高：" + param.args[1] +
-                                "\n一般只需要宽高比与视频相同", Toast.LENGTH_SHORT).show();
+                                "App created a renderer:\nWidth: " + param.args[0] + "\nHeight: " + param.args[1] +
+                                "\nThe video only needs the same aspect ratio", Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
                         XposedBridge.log("【VCAM】[toast]" + e.toString());
                     }

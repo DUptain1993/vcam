@@ -1,110 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">VCAM</string>
-    <string name="module_description">安卓虚拟摄像头</string>
-    <string name="description">请访问在线仓库查看最新更新</string>
-    <string name="Warning">严禁用于任何非法用途！！</string>
+    <string name="module_description">Android virtual camera</string>
+    <string name="description">Check the online repository for the latest updates</string>
+    <string name="Warning">Do not use this for any illegal purpose.</string>
 
     <!-- Permission -->
-    <string name="permission_switch_text">授予本地存储权限</string>
-    <string name="permission_lack_warn">缺少必要权限</string>
-    <string name="permission_description">访问本地存储的权限用于设置配置文件。</string>
-    <string name="positive">确定</string>
-    <string name="negative">拒绝</string>
+    <string name="permission_switch_text">Grant local storage permission</string>
+    <string name="permission_lack_warn">Missing required permissions</string>
+    <string name="permission_description">Storage access is used to read and write configuration files.</string>
+    <string name="positive">OK</string>
+    <string name="negative">Deny</string>
 
     <!-- Home Screen Status -->
-    <string name="status_no_permission">无权限</string>
-    <string name="status_working">工作中</string>
-    <string name="status_paused">已暂停</string>
-    <string name="status_module_inactive">模块未激活</string>
-    <string name="status_activate_hint">请在 Xposed 管理器中激活模块后重启</string>
-    <string name="status_grant_permission">授予权限</string>
-    <string name="status_label_play_mode">播放模式</string>
-    <string name="status_label_mic">麦克风</string>
-    <string name="status_label_video_sound">视频原声</string>
-    <string name="status_label_notification">通知控制</string>
-    <string name="status_value_on">开启</string>
-    <string name="status_value_off">关闭</string>
-    <string name="status_value_random_play">随机播放</string>
-    <string name="status_value_sequential_play">顺序播放</string>
-    <string name="status_value_mic_mute">静音</string>
-    <string name="status_value_mic_replace">音频替换</string>
-    <string name="status_value_mic_sync">视频同步</string>
+    <string name="status_no_permission">No permission</string>
+    <string name="status_working">Working</string>
+    <string name="status_paused">Paused</string>
+    <string name="status_module_inactive">Module inactive</string>
+    <string name="status_activate_hint">Enable the module in your Xposed manager, then reboot</string>
+    <string name="status_grant_permission">Grant permission</string>
+    <string name="status_label_play_mode">Playback</string>
+    <string name="status_label_mic">Microphone</string>
+    <string name="status_label_video_sound">Video audio</string>
+    <string name="status_label_notification">Notification controls</string>
+    <string name="status_value_on">On</string>
+    <string name="status_value_off">Off</string>
+    <string name="status_value_random_play">Shuffle</string>
+    <string name="status_value_sequential_play">In order</string>
+    <string name="status_value_mic_mute">Mute</string>
+    <string name="status_value_mic_replace">Replace audio</string>
+    <string name="status_value_mic_sync">Sync with video</string>
 
     <!-- Settings Screen -->
-    <string name="settings_category_general">常规设置</string>
-    <string name="settings_notification_control">启用通知栏控制</string>
-    <string name="settings_notification_control_desc">在通知栏快速切换视频</string>
-    <string name="settings_play_sound">播放声音</string>
-    <string name="settings_play_sound_desc">替换视频时播放原声音频</string>
-    <string name="settings_mic_hook">麦克风 Hook</string>
-    <string name="settings_mic_hook_desc">Hook 麦克风输入</string>
-    <string name="mic_mode_mute">静音模式</string>
-    <string name="mic_mode_mute_desc">输出静音数据</string>
-    <string name="mic_mode_replace">音频替换</string>
-    <string name="mic_mode_replace_desc">注入自定义音频文件</string>
-    <string name="mic_mode_video_sync">视频同步</string>
-    <string name="mic_mode_video_sync_desc">播放视频原声音轨</string>
-    <string name="settings_random_play">随机播放</string>
-    <string name="settings_random_play_desc">从视频列表中随机选择</string>
-    <string name="settings_category_advanced">高级设置</string>
-    <string name="settings_force_private_dir">强制私有目录</string>
-    <string name="settings_force_private_dir_desc">解决部分应用无法读取文件</string>
-    <string name="settings_disable_toast">禁用Toast</string>
-    <string name="settings_disable_toast_desc">隐藏所有操作提示</string>
-    <string name="settings_enable_photo_fake">启用拍照替换</string>
-    <string name="settings_enable_photo_fake_desc">动态拦截拍照请求注入视频帧</string>
-    <string name="settings_disable_module">禁用模块</string>
-    <string name="settings_disable_module_desc">暂时禁用所有Hook功能</string>
-    <string name="settings_system_permission">系统权限设置</string>
-    <string name="settings_system_permission_desc">管理存储和通知权限</string>
+    <string name="settings_category_general">General</string>
+    <string name="settings_notification_control">Notification controls</string>
+    <string name="settings_notification_control_desc">Switch videos from the notification shade</string>
+    <string name="settings_play_sound">Play sound</string>
+    <string name="settings_play_sound_desc">Play the replacement video\'s audio</string>
+    <string name="settings_mic_hook">Microphone hook</string>
+    <string name="settings_mic_hook_desc">Hook microphone input</string>
+    <string name="mic_mode_mute">Mute</string>
+    <string name="mic_mode_mute_desc">Output silence</string>
+    <string name="mic_mode_replace">Replace audio</string>
+    <string name="mic_mode_replace_desc">Inject a custom audio file</string>
+    <string name="mic_mode_video_sync">Sync with video</string>
+    <string name="mic_mode_video_sync_desc">Play the video\'s own audio track</string>
+    <string name="settings_random_play">Shuffle</string>
+    <string name="settings_random_play_desc">Pick a random video from the list</string>
+    <string name="settings_category_advanced">Advanced</string>
+    <string name="settings_force_private_dir">Force private directory</string>
+    <string name="settings_force_private_dir_desc">Use the app\'s private folder when it cannot read shared storage</string>
+    <string name="settings_disable_toast">Disable toasts</string>
+    <string name="settings_disable_toast_desc">Hide on-screen messages</string>
+    <string name="settings_enable_photo_fake">Replace photos</string>
+    <string name="settings_enable_photo_fake_desc">Intercept photo capture and inject a video frame</string>
+    <string name="settings_disable_module">Disable module</string>
+    <string name="settings_disable_module_desc">Temporarily turn off all hooks</string>
+    <string name="settings_system_permission">System permissions</string>
+    <string name="settings_system_permission_desc">Manage storage and notification permissions</string>
 
     <!-- Stream Settings -->
-    <string name="settings_category_stream">网络流设置</string>
-    <string name="settings_media_source_type">媒体源类型</string>
-    <string name="settings_media_source_local">本地文件</string>
-    <string name="settings_media_source_stream">网络流</string>
-    <string name="settings_stream_url">流地址</string>
-    <string name="settings_stream_url_hint">输入 rtsp:// rtmp:// 等地址</string>
-    <string name="settings_stream_auto_reconnect">自动重连</string>
-    <string name="settings_stream_auto_reconnect_desc">流断开后自动重连</string>
-    <string name="settings_stream_local_fallback">本地兜底</string>
-    <string name="settings_stream_local_fallback_desc">流不可用时回退本地视频</string>
-    <string name="settings_stream_transport_hint">RTSP 传输协议</string>
-    <string name="settings_stream_transport_auto">自动</string>
+    <string name="settings_category_stream">Network stream</string>
+    <string name="settings_media_source_type">Media source</string>
+    <string name="settings_media_source_local">Local file</string>
+    <string name="settings_media_source_stream">Network stream</string>
+    <string name="settings_stream_url">Stream URL</string>
+    <string name="settings_stream_url_hint">Enter an rtsp:// or rtmp:// address</string>
+    <string name="settings_stream_auto_reconnect">Auto reconnect</string>
+    <string name="settings_stream_auto_reconnect_desc">Reconnect when the stream drops</string>
+    <string name="settings_stream_local_fallback">Local fallback</string>
+    <string name="settings_stream_local_fallback_desc">Fall back to a local video if the stream is unavailable</string>
+    <string name="settings_stream_transport_hint">RTSP transport</string>
+    <string name="settings_stream_transport_auto">Auto</string>
     <string name="settings_stream_transport_tcp">TCP</string>
     <string name="settings_stream_transport_udp">UDP</string>
-    <string name="settings_stream_timeout">连接超时</string>
+    <string name="settings_stream_timeout">Connection timeout</string>
 
     <!-- Navigation -->
-    <string name="nav_home">首页</string>
-    <string name="nav_manage">管理</string>
-    <string name="nav_settings">设置</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_manage">Library</string>
+    <string name="nav_settings">Settings</string>
 
     <!-- Manage Screen -->
-    <string name="tab_video_manage">视频</string>
-    <string name="tab_audio_manage">音频</string>
-    <string name="desc_add_media">添加媒体</string>
-    <string name="status_no_video">暂无视频文件</string>
-    <string name="status_no_audio">暂无音频文件</string>
-    <string name="import_to_camera_dir">导入到 Camera1 目录（拷贝）</string>
-    <string name="select_from_storage">从存储选择（引用原文件）</string>
+    <string name="tab_video_manage">Video</string>
+    <string name="tab_audio_manage">Audio</string>
+    <string name="desc_add_media">Add media</string>
+    <string name="status_no_video">No video files</string>
+    <string name="status_no_audio">No audio files</string>
+    <string name="import_to_camera_dir">Import into Camera1 (copy)</string>
+    <string name="select_from_storage">Select from storage (keep original)</string>
 
     <!-- About -->
-    <string name="about_title">关于</string>
+    <string name="about_title">About</string>
     <string name="about_app_name">VCAM</string>
-    <string name="about_desc">基于 Xposed 框架的虚拟摄像头模块</string>
-    <string name="support_title">支持</string>
-    <string name="support_github">在 GitHub 查看、反馈</string>
+    <string name="about_desc">Virtual camera module for the Xposed framework</string>
+    <string name="support_title">Support</string>
+    <string name="support_github">View and report issues on GitHub</string>
 
     <!-- Misc -->
-    <string name="config_migrated">配置已自动迁移</string>
+    <string name="config_migrated">Settings were migrated automatically</string>
 
     <!-- Notification -->
-    <string name="notif_content">VCAM 通知栏控制</string>
-    <string name="notif_action_prev">上一条</string>
-    <string name="notif_action_next">下一条</string>
-    <string name="notif_action_exit">退出</string>
-    <string name="notif_channel_name">VCAM控制服务</string>
-    <string name="notif_channel_desc">显示VCAM视频切换控制</string>
+    <string name="notif_content">VCAM notification controls</string>
+    <string name="notif_action_prev">Previous</string>
+    <string name="notif_action_next">Next</string>
+    <string name="notif_action_exit">Exit</string>
+    <string name="notif_channel_name">VCAM controls</string>
+    <string name="notif_channel_desc">Shows VCAM video switching controls</string>
 </resources>

@@ -62,10 +62,7 @@ public class Camera1Handler {
                     SharedState.origin_preview_camera = (Camera) param.thisObject;
                     SharedState.mSurfacetexture = (SurfaceTexture) param.args[0];
                     if (SharedState.fake_SurfaceTexture == null) {
-                        SharedState.fake_SurfaceTexture = new SurfaceTexture(10);
-                    } else {
-                        SharedState.fake_SurfaceTexture.release();
-                        SharedState.fake_SurfaceTexture = new SurfaceTexture(10);
+                        SharedState.fake_SurfaceTexture = Camera2SessionHook.newDummySurfaceTexture();
                     }
                     param.args[0] = SharedState.fake_SurfaceTexture;
                 } else {
@@ -73,7 +70,7 @@ public class Camera1Handler {
                     if (SharedState.toast_content != null && SharedState.need_to_show_toast) {
                         try {
                             Toast.makeText(SharedState.toast_content,
-                                    "不存在替换视频\n" + lpparam.packageName + "当前路径：" + SharedState.video_path,
+                                    "No replacement video\n" + lpparam.packageName + "\nCurrent path: " + SharedState.video_path,
                                     Toast.LENGTH_SHORT).show();
                         } catch (Exception ee) {
                             XposedBridge.log("【VCAM】[toast]" + ee.toString());
@@ -96,7 +93,7 @@ public class Camera1Handler {
                     if (SharedState.toast_content != null && SharedState.need_to_show_toast) {
                         try {
                             Toast.makeText(SharedState.toast_content,
-                                    "不存在替换视频\n" + lpparam.packageName + "当前路径：" + SharedState.video_path,
+                                    "No replacement video\n" + lpparam.packageName + "\nCurrent path: " + SharedState.video_path,
                                     Toast.LENGTH_SHORT).show();
                         } catch (Exception ee) {
                             XposedBridge.log("【VCAM】[toast]" + ee.toString());
@@ -142,18 +139,15 @@ public class Camera1Handler {
                     });
                     try {
                         SharedState.mplayer1.setDataSource(HookGuards.getVideoFile().getAbsolutePath());
-                        SharedState.mplayer1.prepare();
-                    } catch (IOException e) {
+                        SharedState.mplayer1.prepareAsync();
+                    } catch (Exception e) {
                         XposedBridge.log("【VCAM】" + e.toString());
                     }
                 }
 
                 // SurfaceTexture 播放器
                 if (SharedState.mSurfacetexture != null) {
-                    if (SharedState.mSurface == null) {
-                        SharedState.mSurface = new Surface(SharedState.mSurfacetexture);
-                    } else {
-                        SharedState.mSurface.release();
+                    if (SharedState.mSurface == null || !SharedState.mSurface.isValid()) {
                         SharedState.mSurface = new Surface(SharedState.mSurfacetexture);
                     }
                     if (SharedState.mMediaPlayer == null) {
@@ -178,8 +172,8 @@ public class Camera1Handler {
                     });
                     try {
                         SharedState.mMediaPlayer.setDataSource(HookGuards.getVideoFile().getAbsolutePath());
-                        SharedState.mMediaPlayer.prepare();
-                    } catch (IOException e) {
+                        SharedState.mMediaPlayer.prepareAsync();
+                    } catch (Exception e) {
                         XposedBridge.log("【VCAM】" + e.toString());
                     }
                 }
@@ -200,7 +194,7 @@ public class Camera1Handler {
                     if (SharedState.toast_content != null && SharedState.need_to_show_toast) {
                         try {
                             Toast.makeText(SharedState.toast_content,
-                                    "不存在替换视频\n" + lpparam.packageName + "当前路径：" + SharedState.video_path,
+                                    "No replacement video\n" + lpparam.packageName + "\nCurrent path: " + SharedState.video_path,
                                     Toast.LENGTH_SHORT).show();
                         } catch (Exception ee) {
                             XposedBridge.log("【VCAM】[toast]" + ee.toString());
@@ -214,17 +208,9 @@ public class Camera1Handler {
                 SharedState.ori_holder = (SurfaceHolder) param.args[0];
 
                 if (SharedState.c1_fake_texture == null) {
-                    SharedState.c1_fake_texture = new SurfaceTexture(11);
-                } else {
-                    SharedState.c1_fake_texture.release();
-                    SharedState.c1_fake_texture = null;
-                    SharedState.c1_fake_texture = new SurfaceTexture(11);
+                    SharedState.c1_fake_texture = Camera2SessionHook.newDummySurfaceTexture();
                 }
-                if (SharedState.c1_fake_surface == null) {
-                    SharedState.c1_fake_surface = new Surface(SharedState.c1_fake_texture);
-                } else {
-                    SharedState.c1_fake_surface.release();
-                    SharedState.c1_fake_surface = null;
+                if (SharedState.c1_fake_surface == null || !SharedState.c1_fake_surface.isValid()) {
                     SharedState.c1_fake_surface = new Surface(SharedState.c1_fake_texture);
                 }
                 SharedState.is_hooked = true;
@@ -317,7 +303,7 @@ public class Camera1Handler {
             if (SharedState.toast_content != null && SharedState.need_to_show_toast) {
                 try {
                     Toast.makeText(SharedState.toast_content,
-                            "不存在替换视频\n" + SharedState.toast_content.getPackageName() + "当前路径：" + SharedState.video_path,
+                            "No replacement video\n" + SharedState.toast_content.getPackageName() + "\nCurrent path: " + SharedState.video_path,
                             Toast.LENGTH_SHORT).show();
                 } catch (Exception ee) {
                     XposedBridge.log("【VCAM】[toast]" + ee);
@@ -348,8 +334,8 @@ public class Camera1Handler {
                     SharedState.need_to_show_toast = HookGuards.shouldShowToast();
                     if (SharedState.toast_content != null && SharedState.need_to_show_toast) {
                         try {
-                            Toast.makeText(SharedState.toast_content, "发现预览\n宽：" + SharedState.mwidth +
-                                    "\n高：" + SharedState.mhight + "\n" + "需要视频分辨率与其完全相同", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SharedState.toast_content, "Preview found\nWidth: " + SharedState.mwidth +
+                                    "\nHeight: " + SharedState.mhight + "\n" + "Video resolution must match exactly", Toast.LENGTH_SHORT).show();
                         } catch (Exception ee) {
                             XposedBridge.log("【VCAM】[toast]" + ee.toString());
                         }
@@ -394,8 +380,8 @@ public class Camera1Handler {
                     SharedState.need_to_show_toast = HookGuards.shouldShowToast();
                     if (SharedState.toast_content != null && SharedState.need_to_show_toast) {
                         try {
-                            Toast.makeText(SharedState.toast_content, "发现拍照\n宽：" + SharedState.onemwidth +
-                                    "\n高：" + SharedState.onemhight + "\n格式：YUV_420_888", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SharedState.toast_content, "Photo capture found\nWidth: " + SharedState.onemwidth +
+                                    "\nHeight: " + SharedState.onemhight + "\nFormat: YUV_420_888", Toast.LENGTH_SHORT).show();
                         } catch (Exception e) {
                             XposedBridge.log("【VCAM】[toast]" + e.toString());
                         }
@@ -431,8 +417,8 @@ public class Camera1Handler {
                     SharedState.need_to_show_toast = HookGuards.shouldShowToast();
                     if (SharedState.toast_content != null && SharedState.need_to_show_toast) {
                         try {
-                            Toast.makeText(SharedState.toast_content, "发现拍照\n宽：" + SharedState.onemwidth +
-                                    "\n高：" + SharedState.onemhight + "\n格式：JPEG", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SharedState.toast_content, "Photo capture found\nWidth: " + SharedState.onemwidth +
+                                    "\nHeight: " + SharedState.onemhight + "\nFormat: JPEG", Toast.LENGTH_SHORT).show();
                         } catch (Exception e) {
                             XposedBridge.log("【VCAM】[toast]" + e.toString());
                         }

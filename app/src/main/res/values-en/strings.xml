@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">VCAM</string>
-    <string name="description">Please go to online repository to check for latest update, latest usgae and report bugs</string>
-    <string name="Warning">DO NOT USE FOR ANY ILLEGAL PURPOSE !!YOU NEED TO TAKE ALL RESPONSIBILITY AND CONSEQUENCE!!</string>
-    <string name="permission_lack_warn">Missing permissions</string>
-    <string name="permission_description">The permission to access local storage is used to set up configuration files. If refused you need to set up file manually.</string>
-    <string name="positive">Sure</string>
-    <string name="negative">Refuse</string>
-    <string name="import_to_camera_dir">Import to Camera1 (copy)</string>
-    <string name="select_from_storage">Select from storage (reference)</string>
+    <string name="module_description">Android virtual camera</string>
+    <string name="description">Check the online repository for the latest updates</string>
+    <string name="Warning">Do not use this for any illegal purpose.</string>
+    <string name="permission_switch_text">Grant local storage permission</string>
+    <string name="permission_lack_warn">Missing required permissions</string>
+    <string name="permission_description">Storage access is used to read and write configuration files.</string>
+    <string name="positive">OK</string>
+    <string name="negative">Deny</string>
+    <string name="import_to_camera_dir">Import into Camera1 (copy)</string>
+    <string name="select_from_storage">Select from storage (keep original)</string>
 </resources>

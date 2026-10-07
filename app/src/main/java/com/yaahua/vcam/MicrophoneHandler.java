@@ -320,8 +320,8 @@ public class MicrophoneHandler {
                 if (SharedState.toast_content != null && SharedState.need_to_show_toast) {
                     try {
                         Toast.makeText(SharedState.toast_content,
-                                "应用：" + lpparam.appInfo.name + "(" + lpparam.packageName + ")" +
-                                "触发了录像，但目前无法拦截", Toast.LENGTH_SHORT).show();
+                                "App: " + lpparam.appInfo.name + " (" + lpparam.packageName + ") " +
+                                "started recording, which cannot be intercepted yet", Toast.LENGTH_SHORT).show();
                     } catch (Exception ee) {
                         XposedBridge.log("【VCAM】[toast]" + Arrays.toString(ee.getStackTrace()));
                     }

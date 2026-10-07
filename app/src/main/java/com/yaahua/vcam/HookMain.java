@@ -23,6 +23,13 @@ public class HookMain implements IXposedHookLoadPackage {
     private static volatile boolean configWatcherInitialized = false;
 
     public void handleLoadPackage(final XC_LoadPackage.LoadPackageParam lpparam) throws Exception {
+        // Chrome's renderer and GPU processes are seccomp-sandboxed. Camera hooks
+        // that touch storage, Toast, or SurfaceTexture abort those processes, and
+        // Chrome reports that as a crash as soon as a page opens the camera.
+        // Capture itself runs in the unsandboxed browser process.
+        if (lpparam.processName != null && lpparam.processName.contains(":sandboxed_process")) {
+            return;
+        }
 
         // ========== callApplicationOnCreate：初始化 Context、权限检查、目录迁移 ==========
         XposedHelpers.findAndHookMethod("android.app.Instrumentation", lpparam.classLoader,
@@ -93,7 +100,7 @@ public class HookMain implements IXposedHookLoadPackage {
                                 try {
                                     Toast.makeText(SharedState.toast_content,
                                             lpparam.packageName +
-                                            "未授予读取本地目录权限，请检查权限\nCamera1目前重定向为 " +
+                                            " has no permission to read local storage. Check permissions.\nCamera1 redirected to " +
                                             SharedState.toast_content.getExternalFilesDir(null).getAbsolutePath() +
                                             "/Camera1/", Toast.LENGTH_SHORT).show();
                                     FileOutputStream fos = new FileOutputStream(
@@ -130,10 +137,18 @@ public class HookMain implements IXposedHookLoadPackage {
         });
 
         // ========== 委托 Camera1 Handler ==========
-        Camera1Handler.init(lpparam);
+        try {
+            Camera1Handler.init(lpparam);
+        } catch (Throwable e) {
+            XposedBridge.log("【VCAM】Camera1Handler 初始化失败: " + e);
+        }
 
         // ========== 委托 Camera2 Handler ==========
-        Camera2Handler.init(lpparam);
+        try {
+            Camera2Handler.init(lpparam);
+        } catch (Throwable e) {
+            XposedBridge.log("【VCAM】Camera2Handler 初始化失败: " + e);
+        }
 
         // ========== 委托 Microphone Handler ==========
         try {
